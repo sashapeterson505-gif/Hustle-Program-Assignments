@@ -13,5 +13,3 @@ print(f"{full_name} is {age} years old and goes by {nickname}")
 print(f"Favorite color: {favorites['color']}, Favorite food: {favorites['food']}, Favorite movie: {favorites['movie']}")
 interests = ["anime", "beach", "reading"]
 print(f"Interests: {', '.join(interests)}")
-
-
