@@ -20,8 +20,6 @@
 #   A class for your item. Every item has a name and a price.
 #   Write your class below.
 
-from typing import Any
-
 
 class Snack:
     def __init__(self, name, price, flavor):
