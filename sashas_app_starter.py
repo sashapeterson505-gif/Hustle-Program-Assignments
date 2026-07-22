@@ -27,6 +27,12 @@ class Snack:
         self.price = price
         self.flavor = flavor
 
+    def __str__(self):
+        return f"{self.name} - ${self.price:.2f}"
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}("{self.name}", {self.price:.2f}, "{self.flavor}")'
+
     def get_price(self):
         return self.price
 
@@ -58,6 +64,12 @@ class Drink:
         self.price = price
         self.size = size
 
+    def __str__(self):
+        return f"{self.name} - ${self.price:.2f}"
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}("{self.name}", {self.price:.2f}, "{self.size}", "{self.brand}")'
+
     def get_price(self):
         return self.price
 
@@ -85,6 +97,12 @@ class Candy(Snack):
         super().__init__(name, price, flavor)
         self.snack_type = snack_type
 
+    def __str__(self):
+        return f"{self.name} - ${self.price:.2f}"
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}("{self.name}", {self.price:.2f}, "{self.flavor}", "{self.snack_type}")'
+
     def deliver(self):
         return f"Delivering {self.name} ({self.snack_type})"
     
@@ -96,13 +114,22 @@ class Soda(Drink):
     def deliver(self):
         return f"Delivering {self.name} ({self.brand})"
 
+    def __str__(self):
+        return f"{self.name} - ${self.price:.2f}"
+
 class Cookie(Snack):
     def __init__(self, name, price, flavor, snack_type):
         super().__init__(name, price, flavor)
         self.snack_type = snack_type
 
+    def __repr__(self):
+        return f'{self.__class__.__name__}("{self.name}", {self.price:.2f}, "{self.flavor}", "{self.snack_type}")'
+
     def deliver(self):
         return f"Delivering {self.name} ({self.snack_type})"
+
+    def __str__(self):
+        return f"{self.name} - ${self.price:.2f}"
 
 
 # ============================================================
@@ -119,18 +146,12 @@ class Cart:
 
     def add_item(self, item):
         self.items.append(item)
+        print(f"Added {item.name} to the cart")
+        print("Items in cart:", self.items)
 
     def checkout(self):
-        total = 0
-        for item in self.items:
-            total += item.get_price()
+        total = sum(item.get_price() for item in self.items)
         return total
-    
-    def add_item(self, item):
-        self.items.append(item)
-        print (f"Added {item.name} to the cart")
-
-        print("Items in cart:", self.items) 
 
 
 # TICKET 9: Checkout  (add this method INSIDE your Cart class)
@@ -147,6 +168,9 @@ class IceCream(Snack):
 
     def deliver(self):
         return f"Delivering {self.name} ({self.type})"
+
+    def __str__(self):
+        return f"{self.name} - ${self.price}"
 
 menu = {
     1: Cookie("Oatmeal Cookie", 1.50, "oatmeal", "cookie"),
@@ -218,6 +242,21 @@ while True:
 #Enter ur choice (number, or 'done'): done
 
 # i did this completly wrong.. i dont know where i went wrong because my code is running without any problems or erros
+# i fixxed it with the help of ai, my print menu printed the whole dictionary, and the same for the cart
+
+
+# EXPLANATION 2:
+#Menu: {1: Cookie("Oatmeal Cookie", 1.50, "oatmeal", "cookie"), 2: Candy("Gummy Bears", 1.25, "strawberry", "gummy"), 3: Soda("Cola", 1.75, "medium", "Coca-Cola"), 4: IceCream("Vanilla", 2.50, "vanilla")}
+#Cart: []
+#Enter the number of the item you want to add to the cart: 1
+#Added Oatmeal Cookie to the cart
+#Items in cart: [Cookie("Oatmeal Cookie", 1.50, "oatmeal", "cookie")]
+#welcome to the store! enter the number of the item you want to add to the cart or 'done' to finish shopping:
+#Enter ur choice (number, or 'done'): 4
+#Added Vanilla to the cart
+#Items in cart: [Cookie("Oatmeal Cookie", 1.50, "oatmeal", "cookie"), IceCream("Vanilla", 2.50, "vanilla")]
+#Enter ur choice (number, or 'done'): done
+
 
 # ============================================================
 # CHALLENGE: add a THIRD kind of item, or your own feature!
