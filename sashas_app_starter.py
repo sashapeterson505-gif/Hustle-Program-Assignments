@@ -22,7 +22,6 @@
 
 
 import random
-from tkinter import Menu
 
 welcome_message = ["Welcome to the store!", "How can I help u today?", "What would u like to buy?"]
 # print one message at random
