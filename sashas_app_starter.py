@@ -21,6 +21,16 @@
 #   Write your class below.
 
 
+import random
+from tkinter import Menu
+
+welcome_message = ["Welcome to the store!", "How can I help u today?", "What would u like to buy?"]
+# print one message at random
+print(random.choice(welcome_message))
+
+
+
+
 class Snack:
     def __init__(self, name, price, flavor):
         self.name = name
@@ -117,6 +127,15 @@ class Soda(Drink):
     def __str__(self):
         return f"{self.name} - ${self.price:.2f}"
 
+    def set_price(self, price):
+        if price < 0:
+            print("Price cannot be negative.")
+        else:
+            self.price = price
+
+    def on_sale(self):
+        print(f"sale!{self.name} is on sale! for ${self.price:.2f}")
+
 class Cookie(Snack):
     def __init__(self, name, price, flavor, snack_type):
         super().__init__(name, price, flavor)
@@ -130,6 +149,15 @@ class Cookie(Snack):
 
     def __str__(self):
         return f"{self.name} - ${self.price:.2f}"
+
+    def set_price(self, price):
+        if price < 0:
+            print("Price cannot be negative.")
+        else:
+            self.price = price
+
+    def on_sale(self):
+        print(f"sale!{self.name} is on sale! for ${self.price:.2f}")
 
 
 # ============================================================
@@ -166,11 +194,23 @@ class IceCream(Snack):
         super().__init__(name, price, flavor)
         self.type = type
 
+    def __str__(self):
+        return f"{self.name} - ${self.price:.2f}"
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}("{self.name}", {self.price:.2f}, "{self.flavor}", "{self.type}")'
+
     def deliver(self):
         return f"Delivering {self.name} ({self.type})"
 
-    def __str__(self):
-        return f"{self.name} - ${self.price}"
+    def set_price(self, price):
+        if price < 0:
+            print("Price cannot be negative.")
+        else:
+            self.price = price
+
+    def on_sale(self):
+        print(f"sale!{self.name} is on sale! for ${self.price:.2f}")
 
 menu = {
     1: Cookie("Oatmeal Cookie", 1.50, "oatmeal", "cookie"),
@@ -210,7 +250,18 @@ while True:
         else:
             print("item not found in menu.") 
     else:
-        print("Invalid input.")
+        print("please choose something else.")
+
+print("\n--receipt--")
+if not cart.items:
+    print("Your cart is empty.")
+else:
+    for item in cart.items:
+        print(f" - {item.name}: ${item.price:.2f}")
+
+print(f" u bought: {len(cart.items)} items")
+
+cart.checkout()
 
 # TICKET 10: Test the whole app
 #   Run it start to finish. PREDICT the full output first,
@@ -263,3 +314,12 @@ while True:
 # ============================================================
 
 # added icecream to the menu 
+
+
+
+# extra credit: 
+# welcome messages
+# items on sale
+# not on menu
+# receipt
+# order count
